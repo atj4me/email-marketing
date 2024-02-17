@@ -7,5 +7,5 @@ do
   echo "{\"scriptId\":\"$scriptId\", \"rootDir\":\"src\"}" > .clasp.json
   echo "Working with $scriptId"
   # Push the code to the script
-  npx clasp push
+  npx clasp push -f
 done < script-ids.txt
