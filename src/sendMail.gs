@@ -51,7 +51,7 @@ function customEmailTrigger(e) {
             if (!name) {
                 showMessage(columnI,
                     'Please enter a valid Name!        ',
-                    'error');  
+                    'error');
                 range.setValue("");
                 return;
             }
@@ -60,11 +60,11 @@ function customEmailTrigger(e) {
              * Function to Send Email
              */
             sendEmail(recipientEmail, subject, emailBody);
-            
+
             // Resize the column width to fit content
             columnI.setWrapStrategy(SpreadsheetApp.WrapStrategy.OVERFLOW);
 
-            showMessage(columnI, 
+            showMessage(columnI,
                 'Mail has been Sent Successfully to ' + recipientEmail + '!  with the following content \n\r      ' + emailBody,
                 'success');
 
@@ -80,13 +80,13 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
-function showMessage(Cell, msg, type ){
+function showMessage(Cell, msg, type) {
     Cell.setValue(msg);
     // Apply formatting to highlight the cell
     Cell.setFontWeight('bold'); // Make the text bold
     Cell.setBackground('#FFFF00'); // Set a yellow background color
 
-    if ( type == 'error') {
+    if (type == 'error') {
         columnI.setFontColor('red'); // Change font color to red
     }
     else if (type == 'success') {
@@ -96,9 +96,9 @@ function showMessage(Cell, msg, type ){
 
 function sendEmail(to, subject, body) {
     // Send the email
-               MailApp.sendEmail({
-                   to: "thampiajit@gmail.com",
-                   subject: "Test Email",
-                   body: "Test Message",
-               });
-   }
+    MailApp.sendEmail({
+        to: to,
+        subject: subject,
+        body: body,
+    });
+}
