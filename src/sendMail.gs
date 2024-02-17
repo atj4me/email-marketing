@@ -41,7 +41,6 @@ function customEmailTrigger(e) {
             }
 
             if (!emailBody) {
-
                 showMessage(columnI,
                     'Please enter a valid Body!        ',
                     'error');
@@ -82,7 +81,7 @@ function isValidEmail(email) {
 }
 
 function showMessage(Cell, msg, type ){
-    Cell.setValue('Please enter a valid Name!        ');
+    Cell.setValue(msg);
     // Apply formatting to highlight the cell
     Cell.setFontWeight('bold'); // Make the text bold
     Cell.setBackground('#FFFF00'); // Set a yellow background color
