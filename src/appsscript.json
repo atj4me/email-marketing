@@ -6,8 +6,8 @@
   "runtimeVersion": "V8",
   "sheets": {
     "macros": [{
-      "menuName": "extractMergedData",
-      "functionName": "extractMergedData"
+      "menuName": "Create Buttons",
+      "functionName": "createButtonInCell"
     }]
   }
 }
