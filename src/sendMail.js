@@ -25,47 +25,38 @@ function onEdit(e) {
 
             // Validate recipient email (you can add more validation if needed)
             if (!isValidEmail(recipientEmail)) {
-                columnI.setValue('The email is invalid!        ');
-                // Apply formatting to highlight the cell
-                columnI.setFontWeight('bold'); // Make the text bold
-                columnI.setBackground('#FFFF00'); // Set a yellow background color
-                columnI.setFontColor('red'); // Change font color to red
+                showMessage(columnI,
+                    'The email is invalid!        ',
+                    'error');
 
                 range.setValue("");
                 return;
             }
 
             if (!subject) {
-                columnI.setValue('Please enter a valid Subject!        ');
-                // Apply formatting to highlight the cell
-                columnI.setFontWeight('bold'); // Make the text bold
-                columnI.setBackground('#FFFF00'); // Set a yellow background color
-                columnI.setFontColor('red'); // Change font color to red
-
+                showMessage(columnI,
+                    'Please enter a valid Subject!        ',
+                    'error');
                 range.setValue("");
                 return;
             }
 
 
             if (!emailBody) {
-                columnI.setValue('Please enter a valid Body!        ');
-                // Apply formatting to highlight the cell
-                columnI.setFontWeight('bold'); // Make the text bold
-                columnI.setBackground('#FFFF00'); // Set a yellow background color
-                columnI.setFontColor('red'); // Change font color to red
 
+                showMessage(columnI,
+                    'Please enter a valid Body!        ',
+                    'error');
                 range.setValue("");
                 return;
             }
 
 
             if (!name) {
-                columnI.setValue('Please enter a valid Name!        ');
-                // Apply formatting to highlight the cell
-                columnI.setFontWeight('bold'); // Make the text bold
-                columnI.setBackground('#FFFF00'); // Set a yellow background color
-                columnI.setFontColor('red'); // Change font color to red
-
+                showMessage(columnI,
+                    'Please enter a valid Name!        ',
+                    'error');
+    
                 range.setValue("");
                 return;
             }
@@ -76,14 +67,13 @@ function onEdit(e) {
                 subject: subject,
                 body: emailBody,
             });
-            columnI.setValue('Mail has been Sent Successfully to ' + recipientEmail + '!  with the following content \n\r      ' + emailBody);
+            
             // Resize the column width to fit content
             columnI.setWrapStrategy(SpreadsheetApp.WrapStrategy.OVERFLOW);
 
-            // Apply formatting to highlight the cell
-            columnI.setFontWeight('bold'); // Make the text bold
-            columnI.setBackground('#FFFF00'); // Set a yellow background color
-            columnI.setFontColor('green'); // Change font color to red
+            showMessage(columnI, 
+                'Mail has been Sent Successfully to ' + recipientEmail + '!  with the following content \n\r      ' + emailBody,
+                'success');
 
 
             sheet.autoResizeColumn(9); // Adjust the column index if needed
@@ -98,4 +88,18 @@ function onEdit(e) {
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+}
+
+function showMessage(Cell, msg, type ){
+    Cell.setValue('Please enter a valid Name!        ');
+    // Apply formatting to highlight the cell
+    Cell.setFontWeight('bold'); // Make the text bold
+    Cell.setBackground('#FFFF00'); // Set a yellow background color
+
+    if ( type == 'error') {
+        columnI.setFontColor('red'); // Change font color to red
+    }
+    else if (type == 'success') {
+        Cell.setFontColor('green'); // Change font color to red
+    }
 }
