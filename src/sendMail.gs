@@ -61,12 +61,10 @@ function onEdit(e) {
                 return;
             }
 
-            // Send the email
-            MailApp.sendEmail({
-                to: recipientEmail,
-                subject: subject,
-                body: emailBody,
-            });
+            /**
+             * Function to Send Email
+             */
+            sendEmail(recipientEmail, subject, emailBody);
             
             // Resize the column width to fit content
             columnI.setWrapStrategy(SpreadsheetApp.WrapStrategy.OVERFLOW);
@@ -103,3 +101,12 @@ function showMessage(Cell, msg, type ){
         Cell.setFontColor('green'); // Change font color to red
     }
 }
+
+function sendEmail(to, subject, body) {
+    // Send the email
+               MailApp.sendEmail({
+                   to: "thampiajit@gmail.com",
+                   subject: "Test Email",
+                   body: "Test Message",
+               });
+   }
