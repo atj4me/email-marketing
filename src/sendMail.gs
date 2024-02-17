@@ -1,4 +1,4 @@
-function onEdit(e) {
+function customEmailTrigger(e) {
     // Triggered when a cell is edited
     var sheet = e.source.getActiveSheet();
     var range = e.range;
@@ -20,7 +20,7 @@ function onEdit(e) {
             let emailBody = sheet.getRange('H' + row).getValue();
 
             // Replace #Name with the actual name from cell B
-            const name = sheet.getRange('B2').getValue();
+            const name = sheet.getRange('B' + row).getValue();
             emailBody = emailBody.replace('#Name', name);
 
             // Validate recipient email (you can add more validation if needed)
@@ -28,7 +28,6 @@ function onEdit(e) {
                 showMessage(columnI,
                     'The email is invalid!        ',
                     'error');
-
                 range.setValue("");
                 return;
             }
@@ -41,7 +40,6 @@ function onEdit(e) {
                 return;
             }
 
-
             if (!emailBody) {
 
                 showMessage(columnI,
@@ -51,12 +49,10 @@ function onEdit(e) {
                 return;
             }
 
-
             if (!name) {
                 showMessage(columnI,
                     'Please enter a valid Name!        ',
-                    'error');
-    
+                    'error');  
                 range.setValue("");
                 return;
             }
@@ -73,10 +69,7 @@ function onEdit(e) {
                 'Mail has been Sent Successfully to ' + recipientEmail + '!  with the following content \n\r      ' + emailBody,
                 'success');
 
-
             sheet.autoResizeColumn(9); // Adjust the column index if needed
-
-
             range.setValue("");
         }
     }
